@@ -1,5 +1,5 @@
 #!/usr/bin/expect
-#rsf_auto.sh [use <exploit>] [target <target>] [port <port>]
+
 set usage "rsf_auto.sh use <exploit> target <target> \[port <port>\]"
 set timeout 6000
 set target    ""
@@ -18,11 +18,7 @@ for {set x 0} {$x<$argc} {incr x} {
 	}
 }
 
-if {$exploit==""} {
-	puts $usage
-	exit 1
-}
-if {$target==""} {
+if {$exploit==""} || {$target==""} {
 	puts $usage
 	exit 1
 }
