@@ -1,6 +1,6 @@
 #!/usr/bin/expect
 #rsf_auto.sh [use <exploit>] [target <target>] [port <port>]
-
+set usage "rsf_auto.sh use <exploit> target <target> \[port <port>\]"
 set timeout 6000
 set target    ""
 set exploit   ""
@@ -18,16 +18,22 @@ for {set x 0} {$x<$argc} {incr x} {
 	}
 }
 
+if {$exploit==""} {
+	puts $usage
+	exit 1
+}
+if {$target==""} {
+	puts $usage
+	exit 1
+}
+
 spawn "you_know_what_i_mean.py
-if {$exploit!=""} {
-	expect " > " { send "use $exploit\r" }
-}
-if {$target!=""} {
-	expect " > " { send "set target $target\r" }
-}
+expect " > " { send "use $exploit\r" }
+expect " > " { send "set target $target\r" }
 if {$port!=""} {
 	expect " > " { send "set port $port\r" }
 }
 expect " > " { send "run\r" }
 expect " > " { send "exit\r" }
+
 interact
