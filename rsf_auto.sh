@@ -18,7 +18,15 @@ for {set x 0} {$x<$argc} {incr x} {
 	}
 }
 
-if {$exploit==""} || {$target==""} || {$argc%2!=1} {
+if {$exploit==""} {
+	puts $usage
+	exit 1
+}
+if {$target==""} {
+	puts $usage
+	exit 1
+}
+if {$argc%2!=1} {
 	puts $usage
 	exit 1
 }
