@@ -20,15 +20,13 @@ for {set x 0} {$x<$argc} {incr x} {
 
 spawn "you_know_what_i_mean.py
 if {$exploit!=""} {
-		expect " > " { send "use $exploit\r" }
+	expect " > " { send "use $exploit\r" }
 }
 if {$target!=""} {
 	expect " > " { send "set target $target\r" }
-	puts "target $target"
 }
 if {$port!=""} {
 	expect " > " { send "set port $port\r" }
-	puts "port $port"
 }
 expect " > " { send "run\r" }
 expect " > " { send "exit\r" }
