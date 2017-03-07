@@ -31,5 +31,7 @@ if {$port!=""} {
 }
 expect " > " { send "run\r" }
 expect " > " { send "exit\r" }
+expect " > " { send "exit\r" }
+#some nasty exploits, such as exploits/dlink/dir_645_815_rce, will prompt an interactive shell, so we need to expect  >  and exit yet again
 
 interact
