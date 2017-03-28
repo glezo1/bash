@@ -23,6 +23,8 @@ databases_to_dump=`mysql -h $db_host -u $db_user -p$db_pass -e "show databases" 
 for current_db in $databases_to_dump
 do
   echo $current_db
-  mysqldump -h $db_host -u $db_user -p$db_pass --events --routines --triggers --no-data $current_db > ${output_directory}/$current_db"_STRUCTURE.sql"
-  mysqldump -h $db_host -u $db_user -p$db_pass --no-create-info --skip-triggers $current_db         > ${output_directory}/$current_db"_DATA.sql"
+  mysqldump -h $db_host -u $db_user -p$db_pass --events --routines --triggers --no-data $current_db > $output_directory/$current_db"_STRUCTURE.sql"
+  mysqldump -h $db_host -u $db_user -p$db_pass --no-create-info --skip-triggers $current_db         > $output_directory/$current_db"_DATA.sql"
 done
+zip -r $output_directory $output_directory".zip"
+rm -rf $output_directory
