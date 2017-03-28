@@ -27,5 +27,5 @@ do
   mysqldump -h $db_host -P $db_port -u $db_user -p$db_pass --events --routines --triggers --no-data $current_db > $output_directory/$current_db"_STRUCTURE.sql"
   mysqldump -h $db_host -P $db_port -u $db_user -p$db_pass --no-create-info --skip-triggers $current_db         > $output_directory/$current_db"_DATA.sql"
 done
-zip -r $output_directory $output_directory".zip"
+zip -r $output_directory".zip" $output_directory
 rm -rf $output_directory
