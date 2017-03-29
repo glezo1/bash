@@ -23,9 +23,10 @@ mkdir -p $output_directory
 databases_to_dump=`mysql -h $db_host -P $db_port -u $db_user -p$db_pass -e "show databases" | grep -Ev 'Database|information_schema|mysql'`
 for current_db in $databases_to_dump
 do
-  echo $current_db
-  mysqldump -h $db_host -P $db_port -u $db_user -p$db_pass --events --routines --triggers --no-data $current_db > $output_directory/$current_db"_STRUCTURE.sql"
-  mysqldump -h $db_host -P $db_port -u $db_user -p$db_pass --no-create-info --skip-triggers $current_db         > $output_directory/$current_db"_DATA.sql"
+	echo $current_db
+	mysqldump -h $db_host -P $db_port -u $db_user -p$db_pass --events --routines --triggers --no-data $current_db > $output_directory/$current_db"_STRUCTURE.sql"
+	mysqldump -h $db_host -P $db_port -u $db_user -p$db_pass --no-create-info --skip-triggers $current_db         > $output_directory/$current_db"_DATA.sql"
+	sed -i '1s/^/DROP DATABASE IF EXISTS '"$current_db"';\nCREATE DATABASE '"$current_db"';\nUSE '"$current_db"';\n\n/' $output_directory/$current_db"_STRUCTURE.sql"  
 done
 zip -r $output_directory".zip" $output_directory
 rm -rf $output_directory
