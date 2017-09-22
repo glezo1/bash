@@ -1,12 +1,12 @@
 #!/usr/bin/expect
 
-set usage			"airodump-ng.sh timeout <timeout> bssid <bssid> <airodump_args>"
-set timeout			""
-set bssid			""
+set usage		"airodump-ng.sh timeout <timeout> bssid <bssid> <airodump_args>"
+set timeout		""
+set bssid		""
 set parsing_state	"0"
 #this shall contain 'operators', as timeout, bssid, iface, and, optionally, channel
 set operator  		""
-set command			""
+set command		""
 for {set x 0} {$x<$argc} {incr x} {
 	if { $parsing_state=="0"} {
 		if {$x%2==0} {
